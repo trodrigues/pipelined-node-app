@@ -3,12 +3,8 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
-var Mincer = require('mincer');
 
 var app = express();
-var assetEnv = new Mincer.Environment();
-assetEnv.appendPath('public/javascripts');
-assetEnv.appendPath('public/stylesheets');
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -20,8 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/assets', Mincer.createServer(assetEnv));
+app.use(express.static(path.join(__dirname, 'build')));
 
 // development only
 if ('development' == app.get('env')) {
