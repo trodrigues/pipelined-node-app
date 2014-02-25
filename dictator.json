@@ -1,0 +1,10 @@
+{
+  "watchy": {
+    "cmd": "./node_modules/.bin/watchy",
+    "args": ["-w", "public", "make"]
+  },
+  "nodemon": {
+    "cmd": "./node_modules/.bin/nodemon",
+    "args": ["app.js"]
+  }
+}

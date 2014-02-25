@@ -1,4 +1,4 @@
-export PATH := /usr/local/bin:$(PATH)
+export PATH := ./node_modules/.bin:$(PATH)
 
 js_path := public/javascripts
 css_path := public/stylesheets
@@ -12,15 +12,15 @@ templates := build/templates.js
 
 .PHONY: all clean
 
-all: $(app_js) $(app_css) $(templates)
+#all: $(app_js) $(app_css) $(templates)
+all: $(app_js)
 
 clean:
 	rm -rf build
 
 $(app_js): $(js_files)
 	mkdir -p $(dir $@)
-	node generate_appfiles.js > build/appfiles.js
-	browserify --debug build/appfiles.js $(js_files) > $@
+	browserify --debug -t concatenify $(js_files) > $@
 	rm -f build/appfiles.js
 
 $(templates): $(template_files)
